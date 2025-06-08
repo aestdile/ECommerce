@@ -1,0 +1,27 @@
+ECommerce.Domain
+Common
+	AuditableEntity.cs
+	BaseEntity.cs
+Entities
+	Order
+		Order.cs
+		OrderItem.cs
+	Payment
+		Payment.cs
+		PaymentMethod.cs
+	Product
+		Brand.cs
+		Category.cs
+		Product.cs
+		ProductImage.cs
+		ProductReview.cs
+	User
+		User.cs
+		Role.cs
+		UserRole.cs
+Enums
+	OrderStatus.cs
+	PaymentStatus.cs
+
+ValuesObjects
+	Adress.cs

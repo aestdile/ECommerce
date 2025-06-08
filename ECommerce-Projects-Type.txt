@@ -1,0 +1,8 @@
+1. ECommerce.API — ASP.NET Core Web API
+2. ECommerce.API.Application — Class Library
+3. ECommerce.API.Infrastructure — Class Library
+4. ECommerce.API.Domain — Class Library
+5. ECommerce.API.UnitTets - XUnit Test Projects
+6. ECommerce.API.IntegrationTests - XUnit Test Projects
+7. ECommerce.API.ApiTests - XUnit Test Projects
+
