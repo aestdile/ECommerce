@@ -1,4 +1,5 @@
-﻿using Microsoft.WindowsAzure.MediaServices.Client;
+﻿using ECommerce.Domain.Common;
+
 
 namespace ECommerce.Domain.Entities.Product;
 
