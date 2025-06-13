@@ -1,5 +1,4 @@
-﻿
-using ECommerce.Domain.Common;
+﻿using ECommerce.Domain.Common;
 
 namespace ECommerce.Domain.Entities.Product;
 
