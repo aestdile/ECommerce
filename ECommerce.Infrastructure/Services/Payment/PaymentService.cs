@@ -2,9 +2,6 @@
 using ECommerce.Application.Abstractions.Services;
 using ECommerce.Domain.Entities.Payment;
 using ECommerce.Domain.Enums;
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 
 namespace ECommerce.Infrastructure.Services
 {
@@ -12,13 +9,13 @@ namespace ECommerce.Infrastructure.Services
     {
         private readonly IPaymentRepository _paymentRepository;
         private readonly IOrderRepository _orderRepository;
-        private readonly IPaymentService _paymentGatewayService;
+        private readonly IPaymentGatewayService _paymentGatewayService;
         private readonly INotificationService _notificationService;
 
         public PaymentService(
             IPaymentRepository paymentRepository,
             IOrderRepository orderRepository,
-            IPaymentService paymentGatewayService,
+            IPaymentGatewayService paymentGatewayService,
             INotificationService notificationService)
         {
             _paymentRepository = paymentRepository;
@@ -26,6 +23,7 @@ namespace ECommerce.Infrastructure.Services
             _paymentGatewayService = paymentGatewayService;
             _notificationService = notificationService;
         }
+
 
         public async Task<Payment> CreatePaymentAsync(Guid orderId, decimal amount, Guid paymentMethodId, string? createdBy = null)
         {

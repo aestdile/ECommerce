@@ -32,6 +32,6 @@ public class UnitOfWork : IUnitOfWork
     public async Task<Guid> SaveChangesAsync(CancellationToken cancellationToken = default)
     {
         await _context.SaveChangesAsync(cancellationToken);
-        return Guid.NewGuid(); // yoki boshqa relevant qiymat
+        return Guid.NewGuid(); 
     }
 }
