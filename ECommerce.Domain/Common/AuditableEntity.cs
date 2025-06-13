@@ -7,4 +7,7 @@ public abstract class AuditableEntity<TId> : BaseEntity<TId>
 
     public DateTime? ModifiedOn { get; set; }
     public string? ModifiedBy { get; set; }
+
+    public DateTime? UpdatedOn { get; set; }
+    public string? UpdatedBy { get; set; }
 }
