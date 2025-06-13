@@ -1,9 +1,4 @@
-﻿using System;
-using System.Threading.Tasks;
-using ECommerce.Domain.Entities.User;
-using ECommerce.Application.Abstractions.Persistence;
-using ECommerce.Application.Abstractions.Services;
-using Features.Auth.Commands;
+﻿using ECommerce.Application.Abstractions.Services;
 using Microsoft.AspNet.Identity;
 
 namespace Features.Auth.Commands
@@ -43,7 +38,7 @@ namespace Features.Auth.Commands
                 throw new Exception("Email yoki parol noto‘g‘ri.");
             }
 
-            var token = _tokenService.GenerateToken(user);
+            var token = _tokenService.GenerateAccessToken(user);
 
             return token;
         }

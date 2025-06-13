@@ -1,43 +1,40 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ECommerce.Application.Abstractions.Services;
+using ECommerce.Application.Features.Auth.DTOs;
+using Features.Auth.DTOs;
+using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
-namespace ECommerce.Controllers
+namespace ECommerce.WebAPI.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Route("api/[controller]")]
     public class AuthController : ControllerBase
     {
-        // GET: api/<AuthController>
-        [HttpGet]
-        public IEnumerable<string> Get()
+        private readonly IAuthService _authService;
+
+        public AuthController(IAuthService authService)
         {
-            return new string[] { "value1", "value2" };
+            _authService = authService;
         }
 
-        // GET api/<AuthController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
+        [HttpPost("register")]
+        public async Task<IActionResult> Register([FromBody] RegisterDto registerDto)
         {
-            return "value";
+            var result = await _authService.RegisterAsync(registerDto);
+            return Ok(result);
         }
 
-        // POST api/<AuthController>
-        [HttpPost]
-        public void Post([FromBody]string value)
+        [HttpPost("login")]
+        public async Task<IActionResult> Login([FromBody] LoginDto loginDto)
         {
+            var result = await _authService.LoginAsync(loginDto);
+            return Ok(result);
         }
 
-        // PUT api/<AuthController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        [HttpPost("refresh")]
+        public async Task<IActionResult> Refresh([FromBody] RefreshTokenRequestDto refreshDto)
         {
-        }
-
-        // DELETE api/<AuthController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
+            var result = await _authService.RefreshTokenAsync(refreshDto);
+            return Ok(result);
         }
     }
 }

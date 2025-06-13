@@ -8,6 +8,7 @@ public class Payment : AuditableEntity<Guid>
     public Guid OrderId { get; set; }
     public Order.Order Order { get; set; } = default!;
 
+    public Guid UserId { get; set; }
     public PaymentStatus Status { get; set; }
     public decimal Amount { get; set; }
 

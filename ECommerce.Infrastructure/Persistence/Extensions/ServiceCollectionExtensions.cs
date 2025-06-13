@@ -8,6 +8,8 @@ using ECommerce.Persistence.Repositories;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
+using ECommerce.Domain.Entities.User;
+using Microsoft.AspNetCore.Identity;
 
 public static class ServiceCollectionExtensions
 {
@@ -22,6 +24,10 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IPaymentRepository, PaymentRepository>();
         services.AddScoped<IPaymentGatewayService, FakePaymentGatewayService>();
         services.AddScoped<ICategoryRepository, CategoryRepository>();
+        services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped<ITokenService, TokenService>();
+        services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
+
 
         services.AddScoped<IUnitOfWork, UnitOfWork>();
 
