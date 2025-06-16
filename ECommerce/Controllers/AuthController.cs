@@ -1,9 +1,9 @@
-﻿using ECommerce.Application.Abstractions.Services;
+﻿using ECommerce.Application.Abstractions.Services.Auth;
 using ECommerce.Application.Features.Auth.DTOs;
 using Features.Auth.DTOs;
 using Microsoft.AspNetCore.Mvc;
 
-namespace ECommerce.WebAPI.Controllers
+namespace ECommerce.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]

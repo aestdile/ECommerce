@@ -1,7 +1,7 @@
 ﻿using ECommerce.Application.Features.Auth.DTOs;
 using Features.Auth.DTOs;
 
-namespace ECommerce.Application.Abstractions.Services
+namespace ECommerce.Application.Abstractions.Services.Auth
 {
     public interface IAuthService
     {

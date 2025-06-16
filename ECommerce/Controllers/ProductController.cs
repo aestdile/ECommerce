@@ -1,43 +1,57 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ECommerce.Application.Abstractions.Services;
+using ECommerce.Application.DTOs.Product;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
-namespace ECommerce.Controllers
+namespace ECommerce.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ProductController : ControllerBase
     {
-        // GET: api/<ProductController>
+        private readonly IProductService _productService;
+
+        public ProductController(IProductService productService)
+        {
+            _productService = productService;
+        }
+
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IActionResult> GetAll()
         {
-            return new string[] { "value1", "value2" };
+            var products = await _productService.GetAllAsync();
+            return Ok(products);
         }
 
-        // GET api/<ProductController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<IActionResult> GetById(Guid id)
         {
-            return "value";
+            var product = await _productService.GetByIdAsync(id);
+            return Ok(product);
         }
 
-        // POST api/<ProductController>
         [HttpPost]
-        public void Post([FromBody]string value)
+        public async Task<IActionResult> Create([FromBody] CreateProductDto dto)
         {
+            var product = await _productService.CreateAsync(dto);
+            return CreatedAtAction(nameof(GetById), new { id = product.Id }, product);
         }
 
-        // PUT api/<ProductController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public async Task<IActionResult> Update(Guid id, [FromBody] UpdateProductDto dto)
         {
+            var updated = await _productService.UpdateAsync(id, dto);
+            return Ok(updated);
         }
 
-        // DELETE api/<ProductController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(Guid id)
         {
+            var result = await _productService.DeleteAsync(id);
+            if (!result) return NotFound();
+
+            return NoContent();
         }
     }
 }

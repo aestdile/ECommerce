@@ -1,43 +1,52 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ECommerce.Application.Abstractions.Services;
+using ECommerce.Application.Features.Categories.DTOs;
+using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+namespace ECommerce.WebAPI.Controllers;
 
-namespace ECommerce.Controllers
+[ApiController]
+[Route("api/[controller]")]
+public class CategoryController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class CategoryController : ControllerBase
+    private readonly ICategoryService _categoryService;
+
+    public CategoryController(ICategoryService categoryService)
     {
-        // GET: api/<CategoryController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+        _categoryService = categoryService;
+    }
 
-        // GET api/<CategoryController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
+    [HttpGet]
+    public async Task<IActionResult> GetAll()
+    {
+        var result = await _categoryService.GetAllAsync();
+        return Ok(result);
+    }
 
-        // POST api/<CategoryController>
-        [HttpPost]
-        public void Post([FromBody]string value)
-        {
-        }
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetById(Guid id)
+    {
+        var result = await _categoryService.GetByIdAsync(id);
+        return Ok(result);
+    }
 
-        // PUT api/<CategoryController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
+    [HttpPost]
+    public async Task<IActionResult> Create(CreateCategoryDto dto)
+    {
+        var result = await _categoryService.CreateAsync(dto);
+        return Ok(result);
+    }
 
-        // DELETE api/<CategoryController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+    [HttpPut]
+    public async Task<IActionResult> Update(UpdateCategoryDto dto)
+    {
+        var result = await _categoryService.UpdateAsync(dto);
+        return Ok(result);
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(Guid id)
+    {
+        var success = await _categoryService.DeleteAsync(id);
+        return success ? Ok("O'chirildi") : NotFound("Topilmadi");
     }
 }

@@ -1,43 +1,55 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ECommerce.Application.Abstractions.Services;
+using ECommerce.Application.DTOs.Order;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+namespace ECommerce.API.Controllers;
 
-namespace ECommerce.Controllers
+[Route("api/[controller]")]
+[ApiController]
+[Authorize]
+public class OrderController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class OrderController : ControllerBase
+    private readonly IOrderService _orderService;
+
+    public OrderController(IOrderService orderService)
     {
-        // GET: api/<OrderController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+        _orderService = orderService;
+    }
 
-        // GET api/<OrderController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
+    [HttpPost]
+    public async Task<IActionResult> Create([FromBody] CreateOrderDto dto)
+    {
+        var result = await _orderService.CreateOrderAsync(dto);
+        return Ok(result);
+    }
 
-        // POST api/<OrderController>
-        [HttpPost]
-        public void Post([FromBody]string value)
-        {
-        }
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetById(Guid id)
+    {
+        var order = await _orderService.GetByIdAsync(id);
+        return Ok(order);
+    }
 
-        // PUT api/<OrderController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
+    [HttpGet("my-orders")]
+    public async Task<IActionResult> GetMyOrders()
+    {
+        var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+        if (userIdClaim == null)
+            return Unauthorized();
 
-        // DELETE api/<OrderController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        var userId = Guid.Parse(userIdClaim.Value);
+        var orders = await _orderService.GetOrdersByUserIdAsync(userId);
+        return Ok(orders);
+    }
+
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(Guid id)
+    {
+        var result = await _orderService.DeleteAsync(id);
+        if (!result) return NotFound();
+
+        return NoContent();
     }
 }

@@ -1,5 +1,4 @@
 ﻿using ECommerce.Application.Abstractions.Persistence;
-using ECommerce.Application.Abstractions.Services;
 using ECommerce.Infrastructure.Data;
 using ECommerce.Infrastructure.Services.FileStorage;
 using ECommerce.Infrastructure.Services.Notifications;
@@ -10,6 +9,12 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.EntityFrameworkCore;
 using ECommerce.Domain.Entities.User;
 using Microsoft.AspNetCore.Identity;
+using ECommerce.Application.Abstractions.Services.Auth;
+using ECommerce.Application.Abstractions.Services.NotificationService;
+using ECommerce.Application.Abstractions.Services.Payment;
+using ECommerce.Application.Abstractions.Services.Token;
+using ECommerce.Application.Abstractions.Services.FileStorage;
+using ECommerce.Infrastructure.Services.Payment;
 
 public static class ServiceCollectionExtensions
 {

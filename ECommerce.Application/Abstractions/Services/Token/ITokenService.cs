@@ -1,7 +1,7 @@
 ﻿using System.Security.Claims;
 using ECommerce.Domain.Entities.User;
 
-namespace ECommerce.Application.Abstractions.Services;
+namespace ECommerce.Application.Abstractions.Services.Token;
 
 public interface ITokenService
 {

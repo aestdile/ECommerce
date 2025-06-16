@@ -1,43 +1,49 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ECommerce.Application.Abstractions.Services.Brand;
+using ECommerce.Application.Features.Brands.DTOs;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+namespace ECommerce.WebAPI.Controllers;
 
-namespace ECommerce.Controllers
+[Route("api/[controller]")]
+[ApiController]
+[Authorize]
+public class BrandController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class BrandController : ControllerBase
+    private readonly IBrandService _brandService;
+
+    public BrandController(IBrandService brandService)
     {
-        // GET: api/<BrandController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+        _brandService = brandService;
+    }
 
-        // GET api/<BrandController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
+    [HttpGet]
+    public async Task<IActionResult> GetAll()
+    {
+        var brands = await _brandService.GetAllAsync();
+        return Ok(brands);
+    }
 
-        // POST api/<BrandController>
-        [HttpPost]
-        public void Post([FromBody]string value)
-        {
-        }
+    [HttpGet("{id}")]
+    public async Task<IActionResult> GetById(Guid id)
+    {
+        var brand = await _brandService.GetByIdAsync(id);
+        return Ok(brand);
+    }
 
-        // PUT api/<BrandController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
+    [HttpPost]
+    public async Task<IActionResult> Create([FromBody] CreateBrandDto dto)
+    {
+        var created = await _brandService.CreateAsync(dto);
+        return Ok(created);
+    }
 
-        // DELETE api/<BrandController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+    [HttpDelete("{id}")]
+    public async Task<IActionResult> Delete(Guid id)
+    {
+        var result = await _brandService.DeleteAsync(id);
+        if (!result) return NotFound();
+
+        return NoContent();
     }
 }

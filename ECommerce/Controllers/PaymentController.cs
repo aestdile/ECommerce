@@ -1,43 +1,60 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using System.Security.Claims;
+using ECommerce.Application.Abstractions.Services.Payment;
+using ECommerce.Domain.Enums;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+namespace ECommerce.API.Controllers;
 
-namespace ECommerce.Controllers
+[Route("api/[controller]")]
+[ApiController]
+[Authorize]
+public class PaymentController : ControllerBase
 {
-    [Route("api/[controller]")]
-    [ApiController]
-    public class PaymentController : ControllerBase
+    private readonly IPaymentService _paymentService;
+
+    public PaymentController(IPaymentService paymentService)
     {
-        // GET: api/<PaymentController>
-        [HttpGet]
-        public IEnumerable<string> Get()
-        {
-            return new string[] { "value1", "value2" };
-        }
+        _paymentService = paymentService;
+    }
 
-        // GET api/<PaymentController>/5
-        [HttpGet("{id}")]
-        public string Get(int id)
-        {
-            return "value";
-        }
+    [HttpPost("create")]
+    public async Task<IActionResult> CreatePayment(Guid orderId, decimal amount, Guid paymentMethodId)
+    {
+        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (userId == null)
+            return Unauthorized();
 
-        // POST api/<PaymentController>
-        [HttpPost]
-        public void Post([FromBody]string value)
-        {
-        }
+        var payment = await _paymentService.CreatePaymentAsync(orderId, amount, paymentMethodId, userId);
+        return Ok(payment);
+    }
 
-        // PUT api/<PaymentController>/5
-        [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
-        {
-        }
+    [HttpPost("{id:guid}/process")]
+    public async Task<IActionResult> ProcessPayment(Guid id)
+    {
+        var result = await _paymentService.ProcessPaymentAsync(id);
+        if (!result)
+            return BadRequest("To‘lovni amalga oshirishda xatolik yuz berdi.");
 
-        // DELETE api/<PaymentController>/5
-        [HttpDelete("{id}")]
-        public void Delete(int id)
-        {
-        }
+        return Ok("To‘lov muvaffaqiyatli amalga oshirildi.");
+    }
+
+    [HttpGet("history")]
+    public async Task<IActionResult> GetMyPayments()
+    {
+        var userId = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        if (userId == null)
+            return Unauthorized();
+
+        var history = await _paymentService.GetPaymentHistoryByUserIdAsync(Guid.Parse(userId));
+        return Ok(history);
+    }
+
+    [HttpPut("{id:guid}/status")]
+    public async Task<IActionResult> UpdatePaymentStatus(Guid id, [FromQuery] PaymentStatus status)
+    {
+        var modifiedBy = User.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+        await _paymentService.UpdatePaymentStatusAsync(id, status, modifiedBy);
+        return Ok("Status yangilandi.");
     }
 }

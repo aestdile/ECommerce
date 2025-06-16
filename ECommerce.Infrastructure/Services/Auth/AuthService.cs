@@ -1,7 +1,8 @@
 ﻿using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using ECommerce.Application.Abstractions.Services;
+using ECommerce.Application.Abstractions.Services.Auth;
+using ECommerce.Application.Abstractions.Services.Token;
 using ECommerce.Application.Features.Auth.DTOs;
 using ECommerce.Domain.Entities.User;
 using Features.Auth.DTOs;

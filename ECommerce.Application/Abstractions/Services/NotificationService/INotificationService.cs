@@ -1,4 +1,4 @@
-﻿namespace ECommerce.Application.Abstractions.Services;
+﻿namespace ECommerce.Application.Abstractions.Services.NotificationService;
 
 public interface INotificationService
 {

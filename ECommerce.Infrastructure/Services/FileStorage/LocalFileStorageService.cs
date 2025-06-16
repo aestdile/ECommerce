@@ -1,4 +1,4 @@
-﻿using ECommerce.Application.Abstractions.Services;
+﻿using ECommerce.Application.Abstractions.Services.FileStorage;
 using System.IO;
 using System.Threading.Tasks;
 

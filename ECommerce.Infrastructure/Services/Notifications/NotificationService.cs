@@ -1,6 +1,6 @@
 ﻿using System.Net;
 using System.Net.Mail;
-using ECommerce.Application.Abstractions.Services;
+using ECommerce.Application.Abstractions.Services.NotificationService;
 using Microsoft.Extensions.Options;
 using Twilio;
 using Twilio.Rest.Api.V2010.Account;

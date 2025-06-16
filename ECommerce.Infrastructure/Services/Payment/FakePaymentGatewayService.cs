@@ -1,4 +1,4 @@
-﻿using ECommerce.Application.Abstractions.Services;
+﻿using ECommerce.Application.Abstractions.Services.Payment;
 
 public class FakePaymentGatewayService : IPaymentGatewayService
 {

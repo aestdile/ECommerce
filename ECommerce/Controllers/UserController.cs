@@ -1,43 +1,63 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using ECommerce.Application.Abstractions.Services;
+using ECommerce.Application.DTOs.User;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Claims;
 
-// For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-
-namespace ECommerce.Controllers
+namespace ECommerce.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class UserController : ControllerBase
     {
-        // GET: api/<UserController>
+        private readonly IUserService _userService;
+
+        public UserController(IUserService userService)
+        {
+            _userService = userService;
+        }
+
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<IActionResult> GetAll()
         {
-            return new string[] { "value1", "value2" };
+            var users = await _userService.GetAllAsync();
+            return Ok(users);
         }
 
-        // GET api/<UserController>/5
         [HttpGet("{id}")]
-        public string Get(int id)
+        public async Task<IActionResult> GetById(Guid id)
         {
-            return "value";
+            var user = await _userService.GetByIdAsync(id);
+            return Ok(user);
         }
 
-        // POST api/<UserController>
-        [HttpPost]
-        public void Post([FromBody]string value)
+        [HttpGet("me")]
+        public async Task<IActionResult> GetMyProfile()
         {
+            var userIdClaim = User.FindFirst(ClaimTypes.NameIdentifier);
+            if (userIdClaim == null)
+                return Unauthorized();
+
+            var userId = Guid.Parse(userIdClaim.Value);
+            var user = await _userService.GetByIdAsync(userId);
+            return Ok(user);
         }
 
-        // PUT api/<UserController>/5
         [HttpPut("{id}")]
-        public void Put(int id, [FromBody]string value)
+        public async Task<IActionResult> Update(Guid id, [FromBody] UpdateUserDto dto)
         {
+            var updatedUser = await _userService.UpdateAsync(id, dto);
+            return Ok(updatedUser);
         }
 
-        // DELETE api/<UserController>/5
         [HttpDelete("{id}")]
-        public void Delete(int id)
+        public async Task<IActionResult> Delete(Guid id)
         {
+            var result = await _userService.DeleteAsync(id);
+            if (!result) return NotFound();
+
+            return NoContent();
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using ECommerce.Application.Abstractions.Services;
+﻿using ECommerce.Application.Abstractions.Services.Token;
 using Microsoft.AspNet.Identity;
 
 namespace Features.Auth.Commands
