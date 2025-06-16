@@ -10,7 +10,6 @@ public static class DataSeeder
 {
     public static async Task SeedAsync(ECommerceDbContext context)
     {
-        // Ma'lumotlar mavjud emasligini tekshiramiz
         if (!await context.Roles.AnyAsync())
         {
             var roles = new List<Role>

@@ -1,4 +1,6 @@
 
+using ECommerce.Domain.Common;
+
 namespace ECommerce.Domain.Entities.Product;
 
 public class Category : BaseEntity<Guid>
