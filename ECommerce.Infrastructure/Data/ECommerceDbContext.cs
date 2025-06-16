@@ -16,6 +16,8 @@ public class ECommerceDbContext : DbContext
     public DbSet<Order> Orders { get; set; }
     public DbSet<Payment> Payments { get; set; }
     public DbSet<Brand> Brands { get; set; }
+    public DbSet<Role> Roles { get; set; }
+    public DbSet<PaymentMethod> PaymentMethods { get; set; }
 }
 
 

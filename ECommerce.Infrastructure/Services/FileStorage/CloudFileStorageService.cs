@@ -1,6 +1,7 @@
 ﻿using Amazon.S3;
 using Amazon.S3.Model;
 using ECommerce.Application.Abstractions.Services;
+using ECommerce.Application.Abstractions.Services.FileStorage;
 using Microsoft.Extensions.Configuration;
 
 namespace ECommerce.Infrastructure.Services.FileStorage
