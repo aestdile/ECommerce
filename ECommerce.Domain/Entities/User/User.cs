@@ -9,6 +9,7 @@ public class User : AuditableEntity<Guid>
     public string Email { get; set; } = default!;
     public string PasswordHash { get; set; } = default!;
     public string PhoneNumber { get; set; } = default!;
+    public string? ProfileImageUrl { get; set; }
     public bool IsActive { get; set; } = true;
 
     public string? RefreshToken { get; set; }
