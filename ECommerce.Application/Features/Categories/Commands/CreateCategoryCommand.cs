@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace ECommerce.Application.Features.Categories.Commands;
 
-namespace ECommerce.Application.Features.Categories.Commands
+public class CreateCategoryCommand
 {
-    class CreateCategoryCommand
-    {
-    }
+    public string Name { get; set; } = default!;
+    public string? Description { get; set; }
 }

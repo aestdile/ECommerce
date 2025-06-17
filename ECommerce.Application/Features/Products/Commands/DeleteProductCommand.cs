@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace ECommerce.Application.Features.Products.Commands;
 
-namespace ECommerce.Application.Features.Products.Commands
+public class DeleteProductCommand
 {
-    class DeleteProductCommand
-    {
-    }
+    public Guid Id { get; set; }
 }

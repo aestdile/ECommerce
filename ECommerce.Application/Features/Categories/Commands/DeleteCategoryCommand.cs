@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace ECommerce.Application.Features.Categories.Commands;
 
-namespace ECommerce.Application.Features.Categories.Commands
+public class DeleteCategoryCommand
 {
-    class DeleteCategoryCommand
-    {
-    }
+    public Guid CategoryId { get; set; }
 }

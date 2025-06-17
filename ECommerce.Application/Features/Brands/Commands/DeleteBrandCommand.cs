@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace ECommerce.Application.Features.Brands.Commands;
 
-namespace ECommerce.Application.Features.Brands.Commands
+public class DeleteBrandCommand
 {
-    class DeleteBrandCommand
-    {
-    }
+    public Guid BrandId { get; set; }
 }

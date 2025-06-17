@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AutoMapper;
+using ECommerce.Application.Features.Payments.DTOs;
+using ECommerce.Domain.Entities.Payment;
 
-namespace ECommerce.Application.Features.Payments.Mappings
+namespace ECommerce.Application.Features.Payments.Mappings;
+
+public class PaymentMapping : Profile
 {
-    class PaymentMapping
+    public PaymentMapping()
     {
+        CreateMap<Payment, PaymentDto>().ReverseMap();
     }
 }

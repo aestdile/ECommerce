@@ -1,12 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace ECommerce.Application.Features.Brands.Queries;
 
-namespace ECommerce.Application.Features.Brands.Queries
+public class GetBrandListQuery
 {
-    class GetBrandListQuery
-    {
-    }
 }

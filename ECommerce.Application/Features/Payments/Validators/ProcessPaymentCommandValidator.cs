@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using FluentValidation;
 
-namespace ECommerce.Application.Features.Payments.Validators
+namespace ECommerce.Application.Features.Payments.Commands;
+
+public class ProcessPaymentCommandValidator : AbstractValidator<ProcessPaymentCommand>
 {
-    class ProcessPaymentCommandValidator
+    public ProcessPaymentCommandValidator()
     {
+        RuleFor(x => x.OrderId).NotEmpty();
+        RuleFor(x => x.PaymentMethodId).NotEmpty();
+        RuleFor(x => x.Amount).GreaterThan(0);
     }
 }

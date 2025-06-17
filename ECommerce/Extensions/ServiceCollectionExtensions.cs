@@ -1,13 +1,10 @@
-﻿using Microsoft.AspNetCore.Authentication.JwtBearer;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
+﻿using System.Reflection;
+using System.Text;
+using ECommerce.Application;
+using FluentValidation.AspNetCore;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
-using FluentValidation.AspNetCore;
-using System.Text;
-using System.Reflection;
-using ECommerce.Application;
-using ECommerce.Infrastructure;
 
 namespace ECommerce.WebAPI.Extensions
 {

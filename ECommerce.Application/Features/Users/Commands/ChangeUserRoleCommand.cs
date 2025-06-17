@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace ECommerce.Application.Features.Users.Commands;
 
-namespace ECommerce.Application.Features.Users.Commands
+public class ChangeUserRoleCommand
 {
-    class ChangeUserRoleCommand
-    {
-    }
+    public Guid UserId { get; set; }
+    public Guid RoleId { get; set; }
 }
