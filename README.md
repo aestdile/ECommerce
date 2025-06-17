@@ -39,7 +39,7 @@ Contains core business models:
 * **Enums**: `OrderStatus`, `PaymentStatus`
 * **ValueObjects**: `Address`
 * **Events**: `OrderCreatedEvent`, `ProductStockChangedEvent`, `PaymentProcessedEvent`
-
+---
 ### ECommerce.Application
 
 Application logic, CQRS handlers, DTOs, services:
@@ -56,7 +56,7 @@ Application logic, CQRS handlers, DTOs, services:
   * **Users**: Manage user profiles and roles
 * **Behaviors**: Validation, Logging, Performance behaviors for pipeline
 * **Common**: `Result`, `PaginatedList`, `ApplicationException`
-
+---
 ### ECommerce.Infrastructure
 
 Data access, persistence implementations, integrations:
@@ -69,7 +69,7 @@ Data access, persistence implementations, integrations:
   * Email Service
   * Payment Gateway integration
 * **Migrations**: Database schema migrations
-
+---
 ### ECommerce.WebAPI
 
 REST API interface:
