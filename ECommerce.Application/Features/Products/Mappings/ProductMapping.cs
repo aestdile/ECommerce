@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AutoMapper;
+using ECommerce.Application.DTOs.Product;
+using ECommerce.Domain.Entities.Product;
 
-namespace ECommerce.Application.Features.Products.Mappings
+namespace ECommerce.Application.Features.Products.Mappings;
+
+public class ProductMapping : Profile
 {
-    class ProductMapping
+    public ProductMapping()
     {
+        CreateMap<Product, ProductDto>().ReverseMap();
     }
 }

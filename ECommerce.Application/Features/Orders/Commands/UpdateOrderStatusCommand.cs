@@ -1,12 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using ECommerce.Domain.Enums;
 
-namespace ECommerce.Application.Features.Orders.Commands
+namespace ECommerce.Application.Features.Orders.Commands;
+
+public class UpdateOrderStatusCommand
 {
-    class UpdateOrderStatusCommand
-    {
-    }
+    public Guid OrderId { get; set; }
+    public OrderStatus NewStatus { get; set; }
 }

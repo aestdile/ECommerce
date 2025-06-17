@@ -1,12 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using AutoMapper;
+using ECommerce.Application.DTOs.Order;
+using ECommerce.Domain.Entities.Order;
 
-namespace ECommerce.Application.Features.Orders.Mappings
+namespace ECommerce.Application.Features.Orders.Mappings;
+
+public class OrderMapping : Profile
 {
-    class OrderMapping
+    public OrderMapping()
     {
+        CreateMap<Order, OrderDto>().ReverseMap();
     }
 }

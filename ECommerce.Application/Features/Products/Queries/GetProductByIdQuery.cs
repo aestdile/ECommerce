@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace ECommerce.Application.Features.Products.Queries;
 
-namespace ECommerce.Application.Features.Products.Queries
+public class GetProductByIdQuery
 {
-    class GetProductByIdQuery
-    {
-    }
+    public Guid Id { get; set; }
 }

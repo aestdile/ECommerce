@@ -1,6 +1,7 @@
-﻿namespace ECommerce.Application.Features.Brands.Commands
+﻿namespace ECommerce.Application.Features.Brands.Commands;
+
+public class CreateBrandCommand
 {
-    class CreateBrandCommand
-    {
-    }
+    public string Name { get; set; } = default!;
+    public string? Description { get; set; }
 }

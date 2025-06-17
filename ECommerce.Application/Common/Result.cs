@@ -1,12 +1,18 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿namespace ECommerce.Application.Common;
 
-namespace ECommerce.Application.Common
+public class Result<T>
 {
-    class Result
+    public bool IsSuccess { get; set; }
+    public string? ErrorMessage { get; set; }
+    public T? Data { get; set; }
+
+    private Result(bool isSuccess, string? errorMessage, T? data)
     {
+        IsSuccess = isSuccess;
+        ErrorMessage = errorMessage;
+        Data = data;
     }
+
+    public static Result<T> Success(T data) => new(true, null, data);
+    public static Result<T> Failure(string errorMessage) => new(false, errorMessage, default);
 }
