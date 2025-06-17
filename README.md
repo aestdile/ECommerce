@@ -95,7 +95,7 @@ REST API interface:
 1. **Clone Repository**
 
 ```bash
-git clone <your-repo-url>
+[git clone <your-repo-url>](https://github.com/aestdile/ECommerce.git)
 cd ECommerce
 ```
 
