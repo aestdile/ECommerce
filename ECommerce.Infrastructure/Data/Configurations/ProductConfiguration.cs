@@ -23,10 +23,29 @@ public class ProductConfiguration : IEntityTypeConfiguration<Product>
         builder.Property(p => p.Description)
                .HasMaxLength(500);
 
+        builder.Property(p => p.Quantity)
+               .IsRequired()
+               .HasDefaultValue(0);
+
         builder.HasOne(p => p.Category)
                .WithMany(c => c.Products)
                .HasForeignKey(p => p.CategoryId)
-               .OnDelete(DeleteBehavior.Cascade); 
+               .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasOne(p => p.Brand)
+               .WithMany(b => b.Products)
+               .HasForeignKey(p => p.BrandId)
+               .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasMany(p => p.Images)
+               .WithOne(pi => pi.Product)
+               .HasForeignKey(pi => pi.ProductId)
+               .OnDelete(DeleteBehavior.Cascade);
+
+        builder.HasMany(p => p.Reviews)
+               .WithOne(pr => pr.Product)
+               .HasForeignKey(pr => pr.ProductId)
+               .OnDelete(DeleteBehavior.Cascade);
 
         builder.Property(p => p.CreatedOn).IsRequired();
         builder.Property(p => p.UpdatedOn).IsRequired(false);
