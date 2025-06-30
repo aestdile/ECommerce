@@ -1,5 +1,4 @@
 ﻿using ECommerce.Domain.Common;
-using ECommerce.Domain.Entities.Payment;
 using ECommerce.Domain.Enums;
 using ECommerce.Domain.ValueObjects;
 

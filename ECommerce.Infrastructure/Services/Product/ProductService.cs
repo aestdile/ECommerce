@@ -52,10 +52,11 @@ namespace ECommerce.Infrastructure.Services
                 Name = dto.Name,
                 Description = dto.Description,
                 Price = dto.Price,
-                CategoryId = dto.CategoryId
+                CategoryId = dto.CategoryId,
+                BrandId = dto.BrandId
             };
 
-            _context.Products.Add(product);
+            await _context.Products.AddAsync(product);
             await _context.SaveChangesAsync();
 
             return new ProductDto

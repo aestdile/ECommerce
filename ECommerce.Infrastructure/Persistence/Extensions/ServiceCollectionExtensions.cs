@@ -16,6 +16,7 @@ using ECommerce.Application.Abstractions.Services.Token;
 using ECommerce.Application.Abstractions.Services.FileStorage;
 using ECommerce.Infrastructure.Services.Payment;
 using ECommerce.Application.Abstractions.Services;
+using ECommerce.Application.Abstractions.Services.Brand;
 
 public static class ServiceCollectionExtensions
 {
@@ -44,6 +45,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IPaymentGatewayService, FakePaymentGatewayService>();
         services.AddScoped<IAuthService, AuthService>();
         services.AddScoped<ITokenService, TokenService>();
+        services.AddScoped<IBrandService, BrandService>();
 
 
 
