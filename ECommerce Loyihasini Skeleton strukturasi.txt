@@ -1,0 +1,220 @@
+ECommerce.Domain
+├── Common
+│   ├── BaseEntity.cs             // Barcha Entitylar uchun umumiy ID
+│   └── AuditableEntity.cs        // CreatedAt, UpdatedAt, CreatedBy kabi maydonlar
+
+├── Entities
+│   ├── Order
+│   │   ├── Order.cs              // Order asosiy Entity
+│   │   └── OrderItem.cs          // Har bir buyurtmadagi mahsulotlar
+│   │
+│   ├── Payment
+│   │   ├── Payment.cs            // To'lovlar
+│   │   └── PaymentMethod.cs      // To‘lov usullari (karta, click, naqd va h.k.)
+│   │
+│   ├── Product
+│   │   ├── Product.cs            // Mahsulot asosiy Entity
+│   │   ├── Brand.cs              // Mahsulot brendi
+│   │   ├── Category.cs           // Mahsulot kategoriyasi
+│   │   ├── ProductImage.cs       // Mahsulotga biriktirilgan rasm(lar)
+│   │   └── ProductReview.cs      // Foydalanuvchi baholari
+│   │
+│   └── User
+│       ├── User.cs               // Foydalanuvchi ma'lumotlari
+│       ├── Role.cs               // Rollar (Admin, User, Manager)
+│       └── UserRole.cs           // Ko‘p-to-ko‘p bog‘lanish: User <-> Role
+
+├── Enums
+│   ├── OrderStatus.cs            // Orderning holatlari: Pending, Shipped, Completed, Cancelled
+│   └── PaymentStatus.cs          // To‘lov statuslari: Pending, Paid, Failed
+
+├── ValueObjects
+│   └── Address.cs                // Address bu value object, entity emas (Immutability)
+
+├── Events
+│   ├── OrderCreatedEvent.cs      // Buyurtma yaratilganda trigger bo'ladigan event
+│   ├── ProductStockChangedEvent.cs // Sklad miqdori o‘zgarsa trigger bo‘ladi
+│   └── PaymentProcessedEvent.cs  // To‘lov muvaffaqiyatli bo‘lsa ishga tushadi
+
+
+ECommerce.Application
+├── Abstractions
+│   ├── Persistence
+│   │   ├── IUnitOfWork.cs
+│   │   ├── IProductRepository.cs
+│   │   ├── IOrderRepository.cs
+│   │   ├── IUserRepository.cs
+│   │   ├── IPaymentRepository.cs
+│   │   └── ICategoryRepository.cs
+│   └── Services
+│       ├── IEmailService.cs
+│       ├── IFileStorageService.cs
+│       └── IPaymentGatewayService.cs
+
+├── Features
+│   ├── Auth
+│   │   ├── Commands
+│   │   │   ├── RegisterUserCommand.cs
+│   │   │   ├── RegisterUserCommandHandler.cs
+│   │   │   ├── LoginUserCommand.cs
+│   │   │   └── LoginUserCommandHandler.cs
+│   │   ├── DTOs
+│   │   │   ├── RegisterDto.cs
+│   │   │   └── LoginDto.cs
+│   │   ├── Validators
+│   │   │   └── RegisterUserCommandValidator.cs
+│   │   └── Mappings
+│   │       └── AuthMapping.cs
+│
+│   ├── Products
+│   │   ├── Commands
+│   │   │   ├── CreateProductCommand.cs
+│   │   │   ├── CreateProductCommandHandler.cs
+│   │   │   ├── UpdateProductCommand.cs
+│   │   │   └── DeleteProductCommand.cs
+│   │   ├── Queries
+│   │   │   ├── GetProductByIdQuery.cs
+│   │   │   └── GetProductListQuery.cs
+│   │   ├── DTOs
+│   │   │   └── ProductDto.cs
+│   │   ├── Validators
+│   │   │   └── CreateProductCommandValidator.cs
+│   │   └── Mappings
+│   │       └── ProductMapping.cs
+│
+│   ├── Categories
+│   │   ├── Commands
+│   │   │   ├── CreateCategoryCommand.cs
+│   │   │   └── DeleteCategoryCommand.cs
+│   │   ├── Queries
+│   │   │   └── GetCategoryListQuery.cs
+│   │   ├── DTOs
+│   │   │   └── CategoryDto.cs
+│   │   └── Mappings
+│   │       └── CategoryMapping.cs
+│
+│   ├── Brands
+│   │   ├── Commands
+│   │   │   ├── CreateBrandCommand.cs
+│   │   │   └── DeleteBrandCommand.cs
+│   │   ├── Queries
+│   │   │   └── GetBrandListQuery.cs
+│   │   ├── DTOs
+│   │   │   └── BrandDto.cs
+│   │   └── Mappings
+│   │       └── BrandMapping.cs
+│
+│   ├── Orders
+│   │   ├── Commands
+│   │   │   ├── CreateOrderCommand.cs
+│   │   │   ├── UpdateOrderStatusCommand.cs
+│   │   ├── Queries
+│   │   │   ├── GetOrderListQuery.cs
+│   │   │   └── GetOrderByIdQuery.cs
+│   │   ├── DTOs
+│   │   │   └── OrderDto.cs
+│   │   ├── Validators
+│   │   │   └── CreateOrderCommandValidator.cs
+│   │   └── Mappings
+│   │       └── OrderMapping.cs
+│
+│   ├── Payments
+│   │   ├── Commands
+│   │   │   └── ProcessPaymentCommand.cs
+│   │   ├── Queries
+│   │   │   └── GetPaymentHistoryQuery.cs
+│   │   ├── DTOs
+│   │   │   └── PaymentDto.cs
+│   │   ├── Validators
+│   │   │   └── ProcessPaymentCommandValidator.cs
+│   │   └── Mappings
+│   │       └── PaymentMapping.cs
+│
+│   ├── Users
+│   │   ├── Commands
+│   │   │   ├── UpdateUserProfileCommand.cs
+│   │   │   └── ChangeUserRoleCommand.cs
+│   │   ├── Queries
+│   │   │   ├── GetUserByIdQuery.cs
+│   │   │   └── GetUserListQuery.cs
+│   │   ├── DTOs
+│   │   │   └── UserDto.cs
+│   │   └── Mappings
+│   │       └── UserMapping.cs
+
+├── Behaviors
+│   ├── ValidationBehavior.cs
+│   ├── LoggingBehavior.cs
+│   └── PerformanceBehavior.cs
+
+└── Common
+    ├── Result.cs
+    ├── PaginatedList.cs
+    └── ApplicationException.cs
+
+
+ECommerce.Infrastructure
+├── Data
+│   ├── ECommerceDbContext.cs               // EF Core DbContext
+│   ├── Configurations                      // Fluent API konfiguratsiyalar
+│   │   ├── ProductConfiguration.cs
+│   │   ├── CategoryConfiguration.cs
+│   │   ├── OrderConfiguration.cs
+│   │   ├── PaymentConfiguration.cs
+│   │   └── UserConfiguration.cs
+│   └── Seed                                // Dastlabki ma'lumotlar
+│       └── DataSeeder.cs
+
+├── Persistence
+│   ├── Repositories
+│   │   ├── ProductRepository.cs
+│   │   ├── OrderRepository.cs
+│   │   ├── CategoryRepository.cs
+│   │   ├── PaymentRepository.cs
+│   │   ├── UserRepository.cs
+│   │   └── UnitOfWork.cs
+│   └── Extensions
+│       └── ServiceCollectionExtensions.cs   // DI uchun servislarni qo‘shish
+
+├── Services
+│   ├── FileStorage
+│   │   ├── LocalFileStorageService.cs      // Fayl saqlash (local versiyasi)
+│   │   └── CloudFileStorageService.cs      // (Optional) bulutga yuklash
+│   ├── Email
+│   │   └── EmailService.cs                 // Email yuborish logikasi
+│   └── Payment
+│       └── PaymentGatewayService.cs        // Tashqi to‘lov API integratsiyasi
+
+├── Migrations                              // EF Core migratsiyalari (dotnet ef)
+│   ├── 202506080101_InitialCreate.cs
+│   └── ECommerceDbContextModelSnapshot.cs
+
+└── InfrastructureConstants.cs              // Fayl yo‘llari, limitlar va h.k.
+
+
+ECommerce.WebAPI
+├── Controllers
+│   ├── AuthController.cs
+│   ├── ProductController.cs
+│   ├── CategoryController.cs
+│   ├── BrandController.cs
+│   ├── OrderController.cs
+│   ├── PaymentController.cs
+│   └── UserController.cs
+│
+├── Middlewares
+│   └── ExceptionHandlingMiddleware.cs
+│
+├── Filters
+│   └── ValidationFilter.cs
+│
+├── Extensions
+│   ├── ServiceCollectionExtensions.cs   // JWT, Swagger, CORS, AutoMapper, Validation, Application/Infrastructure qatlamlari DI
+│   └── ApplicationBuilderExtensions.cs  // Middleware larni sozlash
+│
+├── appsettings.json                     // Konfiguratsiyalar (DB, JWT, Mail, Storage, ...)
+├── appsettings.Development.json
+├── launchSettings.json
+
+├── Program.cs                           // Asosiy start fayl
+└── ECommerce.WebAPI.csproj

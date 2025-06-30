@@ -1,4 +1,5 @@
 ﻿using ECommerce.Domain.Common;
+using ECommerce.Domain.Entities.Payment;
 using ECommerce.Domain.Enums;
 using ECommerce.Domain.ValueObjects;
 
@@ -16,6 +17,6 @@ public class Order : AuditableEntity<Guid>
     public Address ShippingAddress { get; set; } = default!;
 
     public decimal TotalPrice { get; set; }
-    public Payment.Payment? Payment { get; set; }
+    public Payment.Payment Payment { get; set; }
 
 }

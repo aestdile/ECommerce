@@ -1,8 +1,9 @@
-﻿using Microsoft.WindowsAzure.MediaServices.Client;
+﻿
+using ECommerce.Domain.Common;
 
 namespace ECommerce.Domain.Entities.Order;
 
-public class OrderItem : BaseEntity
+public class OrderItem : BaseEntity<Guid>
 {
     public Guid OrderId { get; set; }
     public Order Order { get; set; } = default!;

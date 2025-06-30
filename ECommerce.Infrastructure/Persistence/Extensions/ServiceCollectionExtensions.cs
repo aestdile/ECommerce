@@ -15,6 +15,7 @@ using ECommerce.Application.Abstractions.Services.Payment;
 using ECommerce.Application.Abstractions.Services.Token;
 using ECommerce.Application.Abstractions.Services.FileStorage;
 using ECommerce.Infrastructure.Services.Payment;
+using ECommerce.Application.Abstractions.Services;
 
 public static class ServiceCollectionExtensions
 {
@@ -27,10 +28,7 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IOrderRepository, OrderRepository>();
         services.AddScoped<IUserRepository, UserRepository>();
         services.AddScoped<IPaymentRepository, PaymentRepository>();
-        services.AddScoped<IPaymentGatewayService, FakePaymentGatewayService>();
         services.AddScoped<ICategoryRepository, CategoryRepository>();
-        services.AddScoped<IAuthService, AuthService>();
-        services.AddScoped<ITokenService, TokenService>();
         services.AddScoped<IPasswordHasher<User>, PasswordHasher<User>>();
 
 
@@ -39,6 +37,15 @@ public static class ServiceCollectionExtensions
         services.AddScoped<IFileStorageService, LocalFileStorageService>();
         services.AddScoped<INotificationService, NotificationService>();
         services.AddScoped<IPaymentService, PaymentService>();
+        services.AddScoped<IProductService, ProductService>();
+        services.AddScoped<IOrderService, OrderService>();
+        services.AddScoped<IUserService, UserService>();
+        services.AddScoped<ICategoryService, CategoryService>();
+        services.AddScoped<IPaymentGatewayService, FakePaymentGatewayService>();
+        services.AddScoped<IAuthService, AuthService>();
+        services.AddScoped<ITokenService, TokenService>();
+
+
 
         return services;
     }
