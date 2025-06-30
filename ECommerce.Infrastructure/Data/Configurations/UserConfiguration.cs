@@ -41,6 +41,21 @@ namespace ECommerce.Infrastructure.Data.Configurations
                    .HasForeignKey(ur => ur.UserId)
                    .OnDelete(DeleteBehavior.Cascade);
 
+            builder.HasMany(u => u.Orders)
+                   .WithOne(o => o.User)
+                   .HasForeignKey(o => o.UserId)
+                   .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasMany(u => u.Reviews)
+                   .WithOne(r => r.User)
+                   .HasForeignKey(r => r.UserId)
+                   .OnDelete(DeleteBehavior.Restrict);
+
+            builder.HasMany(u => u.Payments)
+                   .WithOne(p => p.User)
+                   .HasForeignKey(p => p.UserId)
+                   .OnDelete(DeleteBehavior.Restrict);
+
             builder.Property(u => u.CreatedOn)
                    .IsRequired();
 
