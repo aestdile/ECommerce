@@ -1,4 +1,6 @@
-﻿namespace ECommerce.Application.DTOs.Product
+﻿using ECommerce.Domain.Entities.Product;
+
+namespace ECommerce.Application.DTOs.Product
 {
     public class CreateProductDto
     {
@@ -6,5 +8,6 @@
         public string Description { get; set; } = default!;
         public decimal Price { get; set; }
         public Guid CategoryId { get; set; }
+        public Guid BrandId { get; set; }
     }
 }

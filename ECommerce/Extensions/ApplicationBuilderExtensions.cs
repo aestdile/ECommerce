@@ -21,10 +21,11 @@ namespace ECommerce.WebAPI.Extensions
 
             app.UseCors("AllowAll");
 
+            app.UseRouting();
+
             app.UseAuthentication();
             app.UseAuthorization();
 
-            app.UseRouting();
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
