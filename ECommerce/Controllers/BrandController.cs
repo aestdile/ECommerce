@@ -7,7 +7,6 @@ namespace ECommerce.WebAPI.Controllers;
 
 [Route("api/[controller]")]
 [ApiController]
-[Authorize]
 public class BrandController : ControllerBase
 {
     private readonly IBrandService _brandService;

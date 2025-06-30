@@ -8,13 +8,13 @@
 
         public static class AwsS3
         {
-            public const string BucketName = "your-s3-bucket-name"; // O'zgartiring
-            public const string Region = "us-east-1"; // Masalan: us-west-2
-            public const string FolderPrefix = "ecommerce"; // S3 ichidagi papka prefix
+            public const string BucketName = "your-s3-bucket-name"; 
+            public const string Region = "us-east-1"; 
+            public const string FolderPrefix = "ecommerce"; 
         }
 
-        public const int MaxImageFileSizeInMB = 5;      // Maksimal 5MB rasm
-        public const int MaxDocumentFileSizeInMB = 10;  // Maksimal 10MB hujjat
+        public const int MaxImageFileSizeInMB = 5;     
+        public const int MaxDocumentFileSizeInMB = 10;  
 
         public static readonly string[] AllowedImageExtensions = { ".jpg", ".jpeg", ".png", ".gif", ".webp" };
 

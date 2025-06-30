@@ -35,9 +35,11 @@ public class ExceptionHandlingMiddleware
         var result = JsonSerializer.Serialize(new
         {
             message = "Ichki server xatosi",
-            error = exception.Message
+            error = exception.Message,
+            innerError = exception.InnerException?.Message
         });
 
         return context.Response.WriteAsync(result);
     }
+
 }

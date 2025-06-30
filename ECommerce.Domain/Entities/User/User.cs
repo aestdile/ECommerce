@@ -18,4 +18,5 @@ public class User : AuditableEntity<Guid>
     public ICollection<UserRole> UserRoles { get; set; } = new List<UserRole>();
     public ICollection<Order.Order>? Orders { get; set; }
     public ICollection<Product.ProductReview>? Reviews { get; set; }
+    public ICollection<Payment.Payment>? Payments { get; set; }
 }
