@@ -47,8 +47,6 @@ public static class ServiceCollectionExtensions
         services.AddScoped<ITokenService, TokenService>();
         services.AddScoped<IBrandService, BrandService>();
 
-
-
         return services;
     }
 }
